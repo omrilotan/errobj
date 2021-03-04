@@ -1,8 +1,6 @@
-const errorStackParser = require('error-stack-parser');
 const props = require('./lib/props');
 const verify = require('./lib/verify');
-
-const parse = errorStackParser.parse.bind(errorStackParser);
+const parseStack = require('./lib/parseStack');
 
 /**
  * Serialise error
@@ -19,22 +17,9 @@ module.exports = function errobj(error, enrichment = {}, { offset = 0, parsedSta
 		error = error.toJSON();
 	}
 
-	const parsed = parse(error);
+	const parsed = parseStack(error, { offset, parsedStack });
 
-	if (typeof offset === 'number' && offset > 0) {
-		parsed.splice(0, offset);
-	}
-
-	if (parsedStack) {
-		parsedStack = parsedStack === true
-			?	Infinity
-			: parsedStack
-		;
-
-		parsed.length = Math.min(parsed.length, parsedStack);
-		Object.assign(error, { parsedStack: parsed });
-	}
-
+	parsedStack && Object.assign(error, { parsedStack: parsed });
 
 	return Object.assign(
 		props(error).reduce(
