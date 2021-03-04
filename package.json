@@ -1,6 +1,6 @@
 {
   "name": "errobj",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "description": "☠️ Serialise errors to literal (JSONable) object",
   "keywords": [
     "error-logger",
@@ -12,7 +12,7 @@
     "☠️"
   ],
   "author": "omrilotan",
-  "license": "MIT",
+  "license": "Unlicense",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/omrilotan/errobj.git"
