@@ -36,7 +36,7 @@ function errobj(error, enrichment = {}, { offset = 0, parsedStack = 0 } = {}) {
 		{ cause: getCause(error) },
 		enrichment,
 	);
-};
+}
 
 
 /**
@@ -51,7 +51,7 @@ function getCause(error) {
 			cause = '[Circular]';
 		} else {
 			cause = JSON.stringify(
-				errobj(cause)
+				errobj(cause),
 			);
 		}
 	}
