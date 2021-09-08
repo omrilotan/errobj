@@ -1,6 +1,6 @@
 {
   "name": "errobj",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "☠️ Serialise errors to literal (JSONable) object",
   "keywords": [
     "error-logger",
@@ -19,9 +19,10 @@
   },
   "homepage": "https://omrilotan.com/errobj/",
   "main": "index.js",
+  "type": "commonjs",
   "browser": "dist/index.js",
   "scripts": {
-    "test": "mocha '**/spec.js'",
+    "test": "mocha **/spec.js",
     "lint": "eslint . --ext .js",
     "build": "parcel build 'index.js' --out-dir 'dist'",
     "prepublishOnly": "npm run build"
