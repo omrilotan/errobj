@@ -6,6 +6,7 @@
 - ✔︎ Serialises errors to literal objects
 - ✔︎ Supports **any** properties attached to the error
 - ✔︎ Expands the error details with lineNumber, columnName, fileName, functionName, ...
+- ✔︎ Parses [error cause](https://github.com/tc39/proposal-error-cause)
 - ✔︎ Accepts an enrichment object
 - ✔︎ Parses the stack trace ([error-stack-parser](https://www.npmjs.com/package/error-stack-parser))
 - ✔︎ Isomorphic
