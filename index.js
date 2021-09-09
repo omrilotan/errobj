@@ -10,7 +10,7 @@ const parseStack = require('./lib/parseStack');
  * @param  {Number} [options.parsedStack=0] Add a parsed stack of the error with a certain depth
  * @return {Object}
  */
-module.exports = function errobj(error, enrichment = {}, { offset = 0, parsedStack = 0 } = {}) {
+function errobj(error, enrichment = {}, { offset = 0, parsedStack = 0 } = {}) {
 	verify(error);
 
 	if (typeof error.toJSON === 'function') {
@@ -33,6 +33,32 @@ module.exports = function errobj(error, enrichment = {}, { offset = 0, parsedSta
 				accumulator,
 			{ ...parsed[0] },
 		),
+		{ cause: getCause(error) },
 		enrichment,
 	);
-};
+}
+
+
+/**
+ * @param {Error} error
+ * @returns {string}
+ */
+function getCause(error) {
+	let { cause } = error;
+
+	if (cause instanceof Error) {
+		if (cause === error) {
+			cause = '[Circular]';
+		} else {
+			cause = JSON.stringify(
+				errobj(cause),
+			);
+		}
+	}
+
+	return typeof cause === undefined
+		?	cause
+		: String(cause);
+}
+
+module.exports = errobj;

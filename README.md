@@ -6,6 +6,7 @@
 - ✔︎ Serialises errors to literal objects
 - ✔︎ Supports **any** properties attached to the error
 - ✔︎ Expands the error details with lineNumber, columnName, fileName, functionName, ...
+- ✔︎ Parses [error cause](https://github.com/tc39/proposal-error-cause)
 - ✔︎ Accepts an enrichment object
 - ✔︎ Parses the stack trace ([error-stack-parser](https://www.npmjs.com/package/error-stack-parser))
 - ✔︎ Isomorphic
@@ -35,7 +36,7 @@ try {
 const errobj = require('errobj');
 
 const original_onerror = window.onerror; // play nicely
-window.onerror = function(message, url, lineNumber, columnNumber, error) {
+window.onerror = function (message, url, lineNumber, columnNumber, error) {
 	fetch(
 		'/error-logger',
 		{
@@ -46,7 +47,7 @@ window.onerror = function(message, url, lineNumber, columnNumber, error) {
 		}
 	);
 
-	original_onerror(message, url, lineNumber, columnNumber, error);
+	return original_onerror(message, url, lineNumber, columnNumber, error);
 }
 ```
 
@@ -72,7 +73,7 @@ window.onerror = function(message, url, lineNumber, columnNumber, error) {
 errobj(error, {flow: 'registration'});
 ```
 
-### option: offset
+### option: offset (stack)
 ```js
 function verboseLog(message) {
 	const error = new Error(message);
@@ -108,10 +109,3 @@ errobj(error, null, {parsedStack: Infinity});
 }
 ```
 
-## Bundled version
-Environments which exclude node_modules from the transpiling pipeline should include the "browser" entry instead of "main".
-
-Also available for explicit import:
-```js
-const errobj = require('errobj/dist');
-```
