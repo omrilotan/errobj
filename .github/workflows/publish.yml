@@ -1,16 +1,17 @@
 name: Publish
-
-on: [push]
-
+on:
+  - push
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ '14' ]
-
+        node-version:
+          - '16'
     steps:
-    - uses: actions/checkout@v1
+    - name: Echo environment
+      run: echo "nodejs $(node -v), npm v$(npm -v)"
+    - uses: actions/checkout@v2
     - name: Install dependencies
       run: npm i
     - name: Run tests
