@@ -1,6 +1,9 @@
 const { expect } = require('chai');
 const errobj = require('.');
 
+const [ major, minor ] = process.versions.node.split('.').map(Number);
+const supportsCause = major > 16 || major === 16 && minor >= 9;
+
 describe('error-notation', () => {
 	it('Should convert an error to an object', () => {
 		const error = new Error('Everything is okay');
@@ -157,19 +160,19 @@ at HTMLIFrameElement.b (https://connect.facebook.net/en_US/fbevents.js:24:3061)`
 		expect(columnNumber).to.equal(284663);
 		expect(extra).to.equal('additional info');
 	});
-	it('should print cause string', () => {
+	supportsCause && it('should print cause string', () => {
 		const error = new Error('Something must have gone terribly wrong', { cause: 'something horrible' });
 		const { cause } = errobj(error);
 		expect(cause).to.equal('something horrible');
 	});
-	it('should parse cause error', () => {
+	supportsCause && it('should parse cause error', () => {
 		const err = new Error('something horrible');
 		const error = new Error('Something must have gone terribly wrong', { cause: err });
 		const original = errobj(err);
 		const { cause } = errobj(error);
 		expect(cause).to.equal(JSON.stringify(original));
 	});
-	it('should parse cause error', () => {
+	supportsCause && it('should escape circular reference in cause', () => {
 		const error = new Error('Something must have gone terribly wrong');
 		error.cause = error;
 		const { cause } = errobj(error);
