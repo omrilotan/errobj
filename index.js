@@ -21,6 +21,8 @@ function errobj(error, enrichment = {}, { offset = 0, parsedStack = 0 } = {}) {
 
 	parsedStack && Object.assign(error, { parsedStack: parsed });
 
+	const cause = getCause(error);
+
 	return Object.assign(
 		props(error).reduce(
 			(accumulator, key) => error[key]
@@ -33,7 +35,7 @@ function errobj(error, enrichment = {}, { offset = 0, parsedStack = 0 } = {}) {
 				accumulator,
 			{ ...parsed[0] },
 		),
-		{ cause: getCause(error) },
+		cause ? { cause } : {},
 		enrichment,
 	);
 }
@@ -56,7 +58,7 @@ function getCause(error) {
 		}
 	}
 
-	return typeof cause === undefined
+	return typeof cause === 'undefined'
 		?	cause
 		: String(cause);
 }

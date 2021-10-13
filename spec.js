@@ -165,6 +165,10 @@ at HTMLIFrameElement.b (https://connect.facebook.net/en_US/fbevents.js:24:3061)`
 		const { cause } = errobj(error);
 		expect(cause).to.equal('something horrible');
 	});
+	supportsCause && it('should print cause string', () => {
+		const error = new Error('Something must have gone terribly wrong');
+		expect(Object.keys(errobj(error))).not.to.include('cause');
+	});
 	supportsCause && it('should parse cause error', () => {
 		const err = new Error('something horrible');
 		const error = new Error('Something must have gone terribly wrong', { cause: err });
