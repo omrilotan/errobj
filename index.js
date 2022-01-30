@@ -40,7 +40,6 @@ function errobj(error, enrichment = {}, { offset = 0, parsedStack = 0 } = {}) {
 	);
 }
 
-
 /**
  * @param {Error} error
  * @returns {string}
