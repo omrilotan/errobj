@@ -1,6 +1,6 @@
 {
   "name": "errobj",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "description": "☠️ Serialise errors to literal (JSONable) object",
   "keywords": [
     "error-logger",
@@ -24,7 +24,7 @@
   "scripts": {
     "test": "mocha **/spec.js",
     "lint": "eslint . --ext .js",
-    "build": "parcel build 'index.js' --out-dir 'dist'",
+    "build": "webpack",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
@@ -36,6 +36,7 @@
     "eslint": "^7.8.0",
     "eslint-plugin-log": "^1.2.4",
     "mocha": "^9.1.0",
-    "parcel-bundler": "^1.12.4"
+    "webpack": "^5.67.0",
+    "webpack-cli": "^4.9.2"
   }
 }
