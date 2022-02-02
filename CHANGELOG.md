@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.4.3
+- Add `babel` and ensure bundle is `es5` compliance.
+
 ## 2.4.2
 - Replace parcel build with webpack
 
