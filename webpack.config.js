@@ -1,12 +1,12 @@
 module.exports = {
 	mode: 'production',
 	entry: './index.js',
-	target: ['web', 'es5'],
+	target: [ 'web', 'es5' ],
 	output: {
 		filename: 'index.js',
 		library: {
 			type: 'commonjs2',
-		}
+		},
 	},
 	module: {
 		rules: [
@@ -16,11 +16,11 @@ module.exports = {
 				use: {
 					loader: 'babel-loader',
 					options: {
-						presets: ['@babel/preset-env']
-					}
-				}
-			}
-		]
+						presets: [ '@babel/preset-env' ],
+					},
+				},
+			},
+		],
 	},
 	devtool: 'source-map',
 };
