@@ -1,6 +1,6 @@
 {
   "name": "errobj",
-  "version": "2.4.3",
+  "version": "2.4.4",
   "description": "☠️ Serialise errors to literal (JSONable) object",
   "keywords": [
     "error-logger",

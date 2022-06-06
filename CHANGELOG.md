@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.4.4
+- Workaround for [ErrorStackParser.parse is not a function](https://github.com/stacktracejs/error-stack-parser/issues/80)
+
 ## 2.4.3
 - Add `babel` and ensure bundle is `es5` compliance.
 
