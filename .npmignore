@@ -1,5 +1,6 @@
 .*
 *.log
 *.md
-spec.js
-*.config.*
+scripts
+src
+*config*
