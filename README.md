@@ -14,7 +14,7 @@
 ### TL;DR
 
 ```js
-import errobj from 'errobj';
+import { errobj } from 'errobj';
 
 try {
 	some broken code
@@ -24,36 +24,35 @@ try {
 ```
 
 #### Arguments
+
 1. `{Error}` (error) An error to be serialised
 2. `{Object}` (enrichment) [_optional_] - This object's field values will be assigned to the serialised error
 3. `{Object}` (options) [_optional_, _nullable_] - See details below
-	- `{Number}` offset [_optional_] - Offset the parsed stack, and error position details. Good for middleware created error objects.
-	- `{Number}` parsedStack [_optional_] - Add a parsed stack of the error with a certain depth
+   - `{Number}` offset [_optional_] - Offset the parsed stack, and error position details. Good for middleware created error objects.
+   - `{Number}` parsedStack [_optional_] - Add a parsed stack of the error with a certain depth
 
 ### Example: Sending uncaught error to an HTTP error logger
 
 ```js
-const errobj = require('errobj');
+const { errobj } = require("errobj");
 
 const original_onerror = window.onerror; // play nicely
 window.onerror = function (message, url, lineNumber, columnNumber, error) {
-	fetch(
-		'/error-logger',
-		{
-			method: 'POST',
-			body: JSON.stringify(
-				errobj(error, {message, url, lineNumber, columnNumber, level: 'error'})
-			)
-		}
-	);
+	fetch("/error-logger", {
+		method: "POST",
+		body: JSON.stringify(
+			errobj(error, { message, url, lineNumber, columnNumber, level: "error" })
+		),
+	});
 
 	return original_onerror(message, url, lineNumber, columnNumber, error);
-}
+};
 ```
 
 ## Examples
 
 ### The serialised error
+
 ```js
 {
 	name: 'RangeError',
@@ -69,19 +68,22 @@ window.onerror = function (message, url, lineNumber, columnNumber, error) {
 ```
 
 ### Add fields to the parsed object
+
 ```js
-errobj(error, {flow: 'registration'});
+errobj(error, { flow: "registration" });
 ```
 
 ### option: offset (stack)
+
 ```js
 function verboseLog(message) {
 	const error = new Error(message);
-	send(errobj(error, null, {offset: 1}));
+	send(errobj(error, null, { offset: 1 }));
 }
 ```
 
 ### option: parsedStack
+
 ```js
 errobj(error, null, {parsedStack: Infinity});
 
@@ -108,4 +110,3 @@ errobj(error, null, {parsedStack: Infinity});
 	...
 }
 ```
-
