@@ -52,7 +52,7 @@ function getCause(error: Error): string | undefined {
 		if (cause === error) {
 			cause = "[Circular]";
 		} else {
-			cause = JSON.stringify(errobj(cause));
+			cause = errobj(cause);
 		}
 	}
 
