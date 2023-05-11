@@ -182,9 +182,7 @@ at HTMLIFrameElement.b (https://connect.facebook.net/en_US/fbevents.js:24:3061)`
 		const error = new Error("Something must have gone terribly wrong", {
 			cause: err,
 		});
-		const original = errobj(err);
-		const { cause } = errobj(error);
-		expect(cause).toBe(JSON.stringify(original));
+		expect(errobj(error.cause as Error)).toEqual(errobj(err));
 	});
 	it("should escape circular reference in cause", (): void => {
 		const error = new Error("Something must have gone terribly wrong");

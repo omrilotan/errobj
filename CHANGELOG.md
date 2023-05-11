@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 3.0.1
+
+- Fix: error.cause should remain its original structure instead of being "stringified"
+
 ## 3.0.0
 
 - New builds for commonjs and esm
