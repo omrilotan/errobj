@@ -14,6 +14,10 @@
 + import { errobj } from 'errobj'
 ```
 
+## 2.4.5
+
+- Fix: error.cause should remain its original structure instead of being "stringified" (backport from 3.0.1)
+
 ## 2.4.4
 
 - Workaround for [ErrorStackParser.parse is not a function](https://github.com/stacktracejs/error-stack-parser/issues/80)
